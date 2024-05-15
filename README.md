@@ -13,6 +13,10 @@ Your own Desi lightweight URL shortener
             -apiHandler.go
         -service
             -service.go
+        -db
+            -db.go
+        -domainIO
+            -domain.go
     -tests
 
 # Backend In-Progress
