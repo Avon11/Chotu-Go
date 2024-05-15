@@ -23,22 +23,34 @@ type PostUrlResponseModel struct {
 
 func PostUrl(w http.ResponseWriter, r *http.Request) {
 	var urlStruct PostUrlRequest
+
 	w.Header().Set("Content-Type", "application/json")
 	err := json.NewDecoder(r.Body).Decode(&urlStruct)
 	if err != nil {
-		log.Fatalln("Error !!! ", err)
+		log.Fatalln("Error while decoding request !!! ", err)
 	}
-	_, _ = service.CreateShortUrl(urlStruct.Url)
-	respModel := &PostUrlResponseModel{
-		Url: urlStruct.Url,
+
+	code := http.StatusOK
+	msg := "success"
+	respModel := &PostUrlResponseModel{}
+
+	shortUrl, errResp := service.CreateShortUrl(urlStruct.Url)
+	if errResp != nil {
+		code = http.StatusInternalServerError
+		msg = "error"
+	} else {
+		respModel = &PostUrlResponseModel{
+			Url: shortUrl.Url,
+		}
 	}
+
 	response := &PostUrlResponse{
-		Code:  http.StatusOK,
-		Msg:   "success",
+		Code:  code,
+		Msg:   msg,
 		Model: respModel,
 	}
 	err = json.NewEncoder(w).Encode(&response)
 	if err != nil {
-		log.Fatalln("Error !!! ", err)
+		log.Fatalln("Error while encoding response !!! ", err)
 	}
 }

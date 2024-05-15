@@ -11,8 +11,8 @@ func Handler() {
 	r := mux.NewRouter()
 
 	// Add all Urls
-	r.HandleFunc("/post-url",api.PostUrl) // Add method
+	r.HandleFunc("/post-url", api.PostUrl).Methods("POST")
 
-	http.Handle("/",r)
+	http.Handle("/", r)
 	http.ListenAndServe(":3000", nil)
 }
