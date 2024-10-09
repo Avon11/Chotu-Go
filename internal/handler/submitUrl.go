@@ -1,11 +1,10 @@
 package api
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 
-	"github.com/Avon11/Chotu-Go/internal/service"
+	"github.com/gin-gonic/gin"
 )
 
 type PostUrlRequest struct {
@@ -17,27 +16,31 @@ type PostUrlResponse struct {
 	Msg   string      `json:"msg"`
 	Model interface{} `json:"model"`
 }
+
 type PostUrlResponseModel struct {
 	Url string `json:"url"`
 }
 
-func PostUrl(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostUrl(c *gin.Context) {
 	var urlStruct PostUrlRequest
 
-	w.Header().Set("Content-Type", "application/json")
-	err := json.NewDecoder(r.Body).Decode(&urlStruct)
-	if err != nil {
-		log.Fatalln("Error while decoding request !!! ", err)
+	if err := c.ShouldBindJSON(&urlStruct); err != nil {
+		log.Println("Error while decoding request: ", err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"code": http.StatusBadRequest,
+			"msg":  "invalid request",
+		})
+		return
 	}
 
 	code := http.StatusOK
 	msg := "success"
 	respModel := &PostUrlResponseModel{}
 
-	shortUrl, errResp := service.CreateShortUrl(urlStruct.Url)
+	shortUrl, errResp := h.Service.CreateShortUrl(c, urlStruct.Url)
 	if errResp != nil {
 		code = http.StatusInternalServerError
-		msg = "error"
+		msg = "internal server error"
 	} else {
 		respModel = &PostUrlResponseModel{
 			Url: shortUrl.Url,
@@ -49,8 +52,6 @@ func PostUrl(w http.ResponseWriter, r *http.Request) {
 		Msg:   msg,
 		Model: respModel,
 	}
-	err = json.NewEncoder(w).Encode(&response)
-	if err != nil {
-		log.Fatalln("Error while encoding response !!! ", err)
-	}
+
+	c.JSON(code, response)
 }

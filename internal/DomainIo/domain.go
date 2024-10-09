@@ -9,3 +9,9 @@ type ErrorResponse struct {
 	ErrMsg  string
 	ErrCode int
 }
+
+type RedirectUrl struct {
+	Code      int
+	ShortCode string
+	Url       string
+}
