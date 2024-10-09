@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	api "github.com/Avon11/Chotu-Go/internal/handler"
+	api "github.com/Avon11/ShrinkRay/internal/handler"
 	"github.com/go-redis/redis/v8"
 )
 

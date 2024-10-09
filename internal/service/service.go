@@ -5,13 +5,13 @@ import (
 	"log"
 	"time"
 
-	db "github.com/Avon11/Chotu-Go/internal/DB"
-	domainio "github.com/Avon11/Chotu-Go/internal/DomainIo"
+	db "github.com/Avon11/ShrinkRay/internal/DB"
+	domainio "github.com/Avon11/ShrinkRay/internal/DomainIo"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 )
 
-const prefix = "https://chotu.com/"
+const prefix = "https://ShrinkRay.com/"
 
 type ShortCodeService struct {
 	RedisClient *redis.Client

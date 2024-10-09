@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/Avon11/Chotu-Go/internal/service"
+	"github.com/Avon11/ShrinkRay/internal/service"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"

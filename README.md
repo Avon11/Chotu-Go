@@ -1,6 +1,6 @@
-# Chotu-Go: URL Shortener Service
+# ShrinkRay: Bringing URL reduction to galactic proportions!
 
-Chotu-Go is a simple and efficient URL shortener service built with Go. It allows users to create short, easy-to-share URLs that redirect to longer, original URLs.
+ShrinkRay is a simple and efficient URL shortener service built with Go. It allows users to create short, easy-to-share URLs that redirect to longer, original URLs.
 
 ## Features
 
@@ -23,13 +23,13 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/Avon11/Chotu-Go.git
+   git clone https://github.com/Avon11/ShrinkRay.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd Chotu-Go
+   cd ShrinkRay
    ```
 
 3. Install dependencies:
@@ -82,7 +82,7 @@ The server will start on `http://localhost:8080` by default.
        "code": 200,
        "msg": "success",
        "model": {
-         "url": "https://chotu.com/06SWjw"
+         "url": "https://ShrinkRay.com/06SWjw"
        }
      }
      ```

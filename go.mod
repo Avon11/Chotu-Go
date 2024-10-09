@@ -1,4 +1,4 @@
-module github.com/Avon11/Chotu-Go
+module github.com/Avon11/ShrinkRay
 
 go 1.20
 
