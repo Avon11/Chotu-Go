@@ -1,18 +1,33 @@
-package apiHandler
+package api
 
 import (
-	"net/http"
-
-	"github.com/Avon11/Chotu-Go/internal/handler/api"
-	"github.com/gorilla/mux"
+	"github.com/Avon11/Chotu-Go/internal/service"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 )
 
-func Handler() {
-	r := mux.NewRouter()
+type Handler struct {
+	Service *service.ShortCodeService
+}
 
-	// Add all Urls
-	r.HandleFunc("/post-url", api.PostUrl).Methods("POST")
+func NewHandler(service *service.ShortCodeService) *Handler {
+	return &Handler{
+		Service: service,
+	}
+}
 
-	http.Handle("/", r)
-	http.ListenAndServe(":3000", nil)
+func SetupAPIHandler(rdb *redis.Client) (*gin.Engine, error) {
+	// Initialize the Gin router
+	r := gin.Default()
+	r.Use(cors.Default())
+
+	service := service.NewCodeService(rdb)
+
+	handler := NewHandler(service)
+
+	r.GET("/get-url", handler.GetUrl)
+	r.POST("/post-url", handler.PostUrl)
+
+	return r, nil
 }
