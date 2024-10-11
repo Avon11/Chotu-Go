@@ -11,7 +11,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-const prefix = "https://ShrinkRay.com/"
+const prefix = "http://localhost:3000/"
 
 type ShortCodeService struct {
 	RedisClient *redis.Client
