@@ -24,7 +24,7 @@ _The main page where users can enter long URLs to be shortened._
 ![Results Page](./frontend/static/ShortCode.png)
 _Displays the shortened URL after processing._
 
-### Redirection page _ include '\_' in shortcode to see this _
+### Redirection page (include '\_' in shortcode)
 
 ![Redirection View](./frontend/static/RedirectWarning.png)
 _Redirection warning page._
